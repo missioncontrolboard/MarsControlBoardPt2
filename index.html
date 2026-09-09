@@ -102,7 +102,8 @@
   </nav>
 
   <section class="display">
-    <!-- Each <article> is one data screen; only one visible at a time -->
+
+    <!-- ============ 01 OVERVIEW ============ -->
     <article id="overview">
       <div class="display-header"><span>SECTOR 01 // GENERAL DATA</span><span>FILE: MARS.OVR</span></div>
       <h3>PLANET OVERVIEW</h3>
@@ -121,8 +122,140 @@
       </div>
     </article>
 
-    <!-- Copy this <article> pattern for the other 7 sections...
-         full code with all 8 sections is in the downloadable file above. -->
+    <!-- ============ 02 STRUCTURE ============ -->
+    <article id="structure" class="hidden">
+      <div class="display-header"><span>SECTOR 02 // GEOPHYSICAL DATA</span><span>FILE: MARS.STR</span></div>
+      <h3>INTERNAL STRUCTURE</h3>
+      <p class="sub">CRUST / MANTLE / CORE ANALYSIS</p>
+      <p>Mars has a layered interior similar to Earth's, but on a smaller and cooler scale. Seismic data from NASA's InSight lander has revealed a core, mantle, and crust that tell the story of a planet that lost its heat long ago.</p>
+      <div class="data-grid">
+        <div class="data-cell"><span class="label">CRUST</span><span class="value">~50 km thick</span></div>
+        <div class="data-cell"><span class="label">MANTLE</span><span class="value">Silicate rock</span></div>
+        <div class="data-cell"><span class="label">OUTER CORE</span><span class="value">Liquid iron-sulfur</span></div>
+        <div class="data-cell"><span class="label">INNER CORE</span><span class="value">~1,800 km radius</span></div>
+      </div>
+      <p>The core is larger and less dense than expected, and Mars no longer has a global magnetic field — evidence that its interior dynamo shut down billions of years ago.</p>
+      <!-- ▼▼ PICTURE SLOT 2 ▼▼ -->
+      <div class="img-slot">
+        <div class="img-label">◉ VISUAL FEED 02 — INTERIOR STRUCTURE IMAGE</div>
+        <img src="INSERT-IMAGE-URL-HERE" alt="Interior structure of Mars">
+      </div>
+    </article>
+
+    <!-- ============ 03 SURFACE ============ -->
+    <article id="surface" class="hidden">
+      <div class="display-header"><span>SECTOR 03 // REGOLITH DATA</span><span>FILE: MARS.SRF</span></div>
+      <h3>SURFACE COMPOSITION</h3>
+      <p class="sub">REGOLITH / DUST / ROCK SAMPLE</p>
+      <p>The Martian surface is a fine, powdery material called <strong>regolith</strong>, rich in iron oxide dust that gives Mars its red hue. Beneath the dust lies basaltic bedrock, and the soil contains minerals like olivine, pyroxene, and hydrated salts — clear signs that liquid water once flowed across this world.</p>
+      <div class="data-grid">
+        <div class="data-cell"><span class="label">SURFACE TYPE</span><span class="value">Basaltic rock</span></div>
+        <div class="data-cell"><span class="label">SOIL COLOUR</span><span class="value">Rust-red</span></div>
+        <div class="data-cell"><span class="label">KEY MINERALS</span><span class="value">Olivine, sulfates</span></div>
+        <div class="data-cell"><span class="label">WATER EVIDENCE</span><span class="value">Hydrated minerals</span></div>
+      </div>
+      <!-- ▼▼ PICTURE SLOT 3 ▼▼ -->
+      <div class="img-slot">
+        <div class="img-label">◉ VISUAL FEED 03 — SURFACE IMAGE</div>
+        <img src="INSERT-IMAGE-URL-HERE" alt="Surface of Mars">
+      </div>
+    </article>
+
+    <!-- ============ 04 FEATURES ============ -->
+    <article id="features" class="hidden">
+      <div class="display-header"><span>SECTOR 04 // TERRAIN MAPPING</span><span>FILE: MARS.FTR</span></div>
+      <h3>SURFACE FEATURES</h3>
+      <p class="sub">LANDMARK CATALOGUE</p>
+      <p>Mars hosts the most extreme geography in the solar system. <strong>Olympus Mons</strong> is the tallest volcano known — nearly three times the height of Mount Everest. <strong>Valles Marineris</strong> is a canyon system that would stretch across the entire United States. The poles hold water and dry-ice ice caps that grow and shrink with the seasons.</p>
+      <div class="data-grid">
+        <div class="data-cell"><span class="label">OLYMPUS MONS</span><span class="value">~21.9 km tall</span></div>
+        <div class="data-cell"><span class="label">VALLES MARINERIS</span><span class="value">4,000 km long</span></div>
+        <div class="data-cell"><span class="label">HELLAS PLANITIA</span><span class="value">7.2 km deep</span></div>
+        <div class="data-cell"><span class="label">POLAR CAPS</span><span class="value">H₂O + CO₂ ice</span></div>
+      </div>
+      <!-- ▼▼ PICTURE SLOT 4 ▼▼ -->
+      <div class="img-slot">
+        <div class="img-label">◉ VISUAL FEED 04 — FEATURES IMAGE</div>
+        <img src="INSERT-IMAGE-URL-HERE" alt="Martian surface features">
+      </div>
+    </article>
+
+    <!-- ============ 05 ATMOSPHERE ============ -->
+    <article id="atmosphere" class="hidden">
+      <div class="display-header"><span>SECTOR 05 // ATMOSPHERIC SENSOR</span><span>FILE: MARS.ATM</span></div>
+      <h3>ATMOSPHERE</h3>
+      <p class="sub">THIN / CO₂ DOMINANT</p>
+      <p>The Martian atmosphere is incredibly thin — less than 1% of Earth's surface pressure. It is composed mostly of carbon dioxide, with traces of argon and nitrogen. This tenuous blanket can't trap much heat or block radiation, and it fuels the planet's colossal dust storms, which can sometimes engulf the entire planet for weeks.</p>
+      <div class="data-grid">
+        <div class="data-cell"><span class="label">SURFACE PRESSURE</span><span class="value">&lt; 1% of Earth</span></div>
+        <div class="data-cell"><span class="label">CARBON DIOXIDE</span><span class="value">95.3%</span></div>
+        <div class="data-cell"><span class="label">ARGON</span><span class="value">1.9%</span></div>
+        <div class="data-cell"><span class="label">NITROGEN</span><span class="value">1.9%</span></div>
+      </div>
+      <!-- ▼▼ PICTURE SLOT 5 ▼▼ -->
+      <div class="img-slot">
+        <div class="img-label">◉ VISUAL FEED 05 — ATMOSPHERE IMAGE</div>
+        <img src="INSERT-IMAGE-URL-HERE" alt="Martian atmosphere">
+      </div>
+    </article>
+
+    <!-- ============ 06 TEMPERATURE ============ -->
+    <article id="temperature" class="hidden">
+      <div class="display-header"><span>SECTOR 06 // THERMAL SENSOR</span><span>FILE: MARS.TMP</span></div>
+      <h3>TEMPERATURE</h3>
+      <p class="sub">COLD DESERT WORLD</p>
+      <p>Mars is a frozen desert. With almost no atmosphere to retain heat, temperatures swing wildly between day and night. The average temperature is around <strong>−63 °C</strong>, and a summer afternoon near the equator may briefly reach a mild 20 °C before plunging to −73 °C at night.</p>
+      <div class="data-grid">
+        <div class="data-cell"><span class="label">AVERAGE</span><span class="value">−63 °C</span></div>
+        <div class="data-cell"><span class="label">DAYTIME HIGH</span><span class="value">~+20 °C</span></div>
+        <div class="data-cell"><span class="label">NIGHTTIME LOW</span><span class="value">−110 °C</span></div>
+        <div class="data-cell"><span class="label">POLAR WINTER</span><span class="value">−125 °C</span></div>
+      </div>
+      <!-- ▼▼ PICTURE SLOT 6 ▼▼ -->
+      <div class="img-slot">
+        <div class="img-label">◉ VISUAL FEED 06 — TEMPERATURE IMAGE</div>
+        <img src="INSERT-IMAGE-URL-HERE" alt="Martian temperature visualization">
+      </div>
+    </article>
+
+    <!-- ============ 07 GRAVITY ============ -->
+    <article id="gravity" class="hidden">
+      <div class="display-header"><span>SECTOR 07 // GRAVIMETRIC SCAN</span><span>FILE: MARS.GRV</span></div>
+      <h3>GRAVITY</h3>
+      <p class="sub">0.38 g FIELD</p>
+      <p>Mars is smaller and less dense than Earth, so its surface gravity is only <strong>38% of ours</strong>. A person weighing 100 kg on Earth would feel like they weigh just 38 kg on Mars. This weaker gravity is one of the biggest unknowns for long-term human missions — it affects bone density, muscle mass, and even whether Mars could ever hold a thicker atmosphere.</p>
+      <div class="data-grid">
+        <div class="data-cell"><span class="label">SURFACE GRAVITY</span><span class="value">3.71 m/s²</span></div>
+        <div class="data-cell"><span class="label">COMPARED TO EARTH</span><span class="value">0.38 g</span></div>
+        <div class="data-cell"><span class="label">ESCAPE VELOCITY</span><span class="value">5.03 km/s</span></div>
+        <div class="data-cell"><span class="label">100 kg PERSON</span><span class="value">Feels like 38 kg</span></div>
+      </div>
+      <!-- ▼▼ PICTURE SLOT 7 ▼▼ -->
+      <div class="img-slot">
+        <div class="img-label">◉ VISUAL FEED 07 — GRAVITY IMAGE</div>
+        <img src="INSERT-IMAGE-URL-HERE" alt="Gravity on Mars">
+      </div>
+    </article>
+
+    <!-- ============ 08 MOONS ============ -->
+    <article id="moons" class="hidden">
+      <div class="display-header"><span>SECTOR 08 // ORBITAL TRACKING</span><span>FILE: MARS.MNS</span></div>
+      <h3>MOONS: PHOBOS &amp; DEIMOS</h3>
+      <p class="sub">FEAR // PANIC</p>
+      <p>Mars has two small, potato-shaped moons named after the sons of Ares (the Greek Mars): <strong>Phobos</strong> ("Fear") and <strong>Deimos</strong> ("Panic"). They are tiny and cratered, and most scientists believe they are captured asteroids from the nearby asteroid belt. Phobos orbits so close to Mars that it rises in the west and sets in the east — twice per Martian day.</p>
+      <div class="data-grid">
+        <div class="data-cell"><span class="label">PHOBOS DIAMETER</span><span class="value">~22 km</span></div>
+        <div class="data-cell"><span class="label">PHOBOS ORBIT</span><span class="value">9,376 km</span></div>
+        <div class="data-cell"><span class="label">DEIMOS DIAMETER</span><span class="value">~12 km</span></div>
+        <div class="data-cell"><span class="label">DEIMOS ORBIT</span><span class="value">23,463 km</span></div>
+      </div>
+      <!-- ▼▼ PICTURE SLOT 8 ▼▼ -->
+      <div class="img-slot">
+        <div class="img-label">◉ VISUAL FEED 08 — MOONS IMAGE</div>
+        <img src="INSERT-IMAGE-URL-HERE" alt="Phobos and Deimos">
+      </div>
+    </article>
+
   </section>
 </main>
 
