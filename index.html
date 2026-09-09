@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARES-1 // MARS MISSION CONTROL</title>
+<style>
+  :root {
+    --bg:#050a08; --panel:#0b1410; --panel-2:#0e1a14; --line:#1e3a2c;
+    --green:#33ff77; --green-dim:#1a8a44; --amber:#ffb347;
+    --text:#b8e6c9; --text-dim:#5f8a6e;
+    --mono:"Courier New", Consolas, monospace;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg); color: var(--text); font-family: var(--mono);
+    min-height: 100vh; padding: 24px;
+    background-image:
+      linear-gradient(rgba(51,255,119,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(51,255,119,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  body::after {
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:999;
+    background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0,0,0,0.15) 2px 4px);
+  }
+  header {
+    border:1px solid var(--line); background:var(--panel); padding:14px 20px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+  }
+  header h1 { color:var(--green); font-size:1.3rem; letter-spacing:3px;
+    text-shadow:0 0 8px rgba(51,255,119,0.6); }
+  .status-strip { display:flex; gap:18px; font-size:0.75rem; color:var(--text-dim); }
+  .led { display:inline-block; width:8px; height:8px; border-radius:50%;
+    margin-right:6px; vertical-align:middle; }
+  .led.green { background:var(--green); box-shadow:0 0 8px var(--green); animation:blink 2s infinite; }
+  .led.amber { background:var(--amber); box-shadow:0 0 8px var(--amber); animation:blink 1.1s infinite; }
+  @keyframes blink { 50% { opacity:0.25; } }
+  main { display:grid; grid-template-columns:260px 1fr; gap:20px; margin-top:20px; }
+  @media (max-width:800px) { main { grid-template-columns:1fr; } }
+  .control-panel { border:1px solid var(--line); background:var(--panel);
+    padding:16px; align-self:start; }
+  .control-panel h2 { color:var(--amber); font-size:0.8rem; letter-spacing:2px;
+    margin-bottom:14px; border-bottom:1px dashed var(--line); padding-bottom:8px; }
+  .ctrl-btn {
+    display:block; width:100%; text-align:left; font-family:var(--mono);
+    font-size:0.85rem; letter-spacing:1px; color:var(--text-dim);
+    background:var(--panel-2); border:1px solid var(--line); border-left:4px solid var(--line);
+    padding:11px 12px; margin-bottom:8px; cursor:pointer; transition:all 0.15s ease;
+  }
+  .ctrl-btn::before { content:"[ ] "; color:var(--line); }
+  .ctrl-btn:hover { color:var(--green); border-left-color:var(--green-dim); background:#10241a; }
+  .ctrl-btn.active { color:#041208; background:var(--green); border-color:var(--green);
+    border-left-color:var(--amber); font-weight:bold; box-shadow:0 0 14px rgba(51,255,119,0.45); }
+  .ctrl-btn.active::before { content:"[■] "; }
+  .display { border:1px solid var(--line); background:var(--panel); padding:24px; min-height:520px; }
+  .display-header { display:flex; justify-content:space-between; border-bottom:1px solid var(--line);
+    padding-bottom:10px; margin-bottom:18px; font-size:0.75rem; color:var(--text-dim); letter-spacing:2px; }
+  .display h3 { color:var(--green); font-size:1.5rem; letter-spacing:3px; margin-bottom:6px;
+    text-shadow:0 0 10px rgba(51,255,119,0.4); }
+  .display .sub { color:var(--amber); font-size:0.8rem; letter-spacing:2px; margin-bottom:18px; }
+  .display p { line-height:1.7; font-size:0.95rem; margin-bottom:14px; }
+  .data-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:12px; margin:18px 0; }
+  .data-cell { border:1px dashed var(--line); padding:12px; font-size:0.78rem; }
+  .data-cell .label { color:var(--text-dim); display:block; margin-bottom:4px; }
+  .data-cell .value { color:var(--green); font-size:1.05rem; }
+  .img-slot { margin-top:22px; border:1px dashed var(--green-dim);
+    background:rgba(51,255,119,0.03); padding:10px; }
+  .img-slot .img-label { font-size:0.7rem; color:var(--amber); letter-spacing:2px; margin-bottom:8px; }
+  .img-slot img { width:100%; display:block; min-height:220px; object-fit:cover;
+    background:repeating-linear-gradient(45deg,#0e1a14 0 12px,#0b1410 12px 24px); }
+  footer { margin-top:20px; border:1px solid var(--line); background:var(--panel);
+    overflow:hidden; font-size:0.75rem; color:var(--green-dim); letter-spacing:2px;
+    padding:10px 0; white-space:nowrap; }
+  .ticker { display:inline-block; animation:scroll 28s linear infinite; }
+  @keyframes scroll { from { transform:translateX(100%);} to { transform:translateX(-100%);} }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⬤ ARES-1 // MARS MISSION CONTROL</h1>
+  <div class="status-strip">
+    <span><span class="led green"></span>UPLINK: NOMINAL</span>
+    <span><span class="led amber"></span>DELAY: 14 MIN</span>
+    <span id="clock">T+ 00:00:00</span>
+  </div>
+</header>
+
+<main>
+  <nav class="control-panel">
+    <h2>■ SUBSYSTEM SELECT</h2>
+    <button class="ctrl-btn active" onclick="showSection('overview', this)">PLANET OVERVIEW</button>
+    <button class="ctrl-btn" onclick="showSection('structure', this)">INTERNAL STRUCTURE</button>
+    <button class="ctrl-btn" onclick="showSection('surface', this)">SURFACE COMPOSITION</button>
+    <button class="ctrl-btn" onclick="showSection('features', this)">SURFACE FEATURES</button>
+    <button class="ctrl-btn" onclick="showSection('atmosphere', this)">ATMOSPHERE</button>
+    <button class="ctrl-btn" onclick="showSection('temperature', this)">TEMPERATURE</button>
+    <button class="ctrl-btn" onclick="showSection('gravity', this)">GRAVITY</button>
+    <button class="ctrl-btn" onclick="showSection('moons', this)">MOONS: PHOBOS &amp; DEIMOS</button>
+  </nav>
+
+  <section class="display">
+    <!-- Each <article> is one data screen; only one visible at a time -->
+    <article id="overview">
+      <div class="display-header"><span>SECTOR 01 // GENERAL DATA</span><span>FILE: MARS.OVR</span></div>
+      <h3>PLANET OVERVIEW</h3>
+      <p class="sub">SOL-4 // THE RED PLANET</p>
+      <p>Mars is the fourth planet from the Sun and the second-smallest planet in the solar system — a cold, desert world known as the <strong>"Red Planet"</strong> because iron minerals in its soil oxidize (rust), colouring the surface. It is the most habitable planet in our solar system besides Earth, making it the prime target for exploration.</p>
+      <div class="data-grid">
+        <div class="data-cell"><span class="label">DISTANCE FROM SUN</span><span class="value">227.9 M km</span></div>
+        <div class="data-cell"><span class="label">DIAMETER</span><span class="value">6,779 km</span></div>
+        <div class="data-cell"><span class="label">LENGTH OF DAY</span><span class="value">24 h 37 m</span></div>
+        <div class="data-cell"><span class="label">LENGTH OF YEAR</span><span class="value">687 d</span></div>
+      </div>
+      <!-- ▼▼ PICTURE SLOT 1: replace src with your image URL or "images/mars-overview.jpg" ▼▼ -->
+      <div class="img-slot">
+        <div class="img-label">◉ VISUAL FEED 01 — MARS OVERVIEW IMAGE</div>
+        <img src="INSERT-IMAGE-URL-HERE" alt="Planet Mars overview">
+      </div>
+    </article>
+
+    <!-- Copy this <article> pattern for the other 7 sections...
+         full code with all 8 sections is in the downloadable file above. -->
+  </section>
+</main>
+
+<footer>
+  <span class="ticker">/// ARES-1 TELEMETRY: ALL SYSTEMS NOMINAL ▪ SOL 4127 ▪ WIND 22 KM/H NW ▪ DUST OPACITY 0.4 TAU ▪ O₂ GEN 97.2% ▪ NEXT TRANSIT WINDOW: 22 MIN ▪ ///</span>
+</footer>
+
+<script>
+  function showSection(id, btn) {
+    document.querySelectorAll('.display article').forEach(a => a.classList.add('hidden'));
+    document.getElementById(id).classList.remove('hidden');
+    document.querySelectorAll('.ctrl-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  let seconds = 0;
+  setInterval(() => {
+    seconds++;
+    const h = String(Math.floor(seconds/3600)).padStart(2,'0');
+    const m = String(Math.floor((seconds%3600)/60)).padStart(2,'0');
+    const s = String(seconds%60).padStart(2,'0');
+    document.getElementById('clock').textContent = 'T+ ' + h + ':' + m + ':' + s;
+  }, 1000);
+</script>
+
+</body>
+</html>
